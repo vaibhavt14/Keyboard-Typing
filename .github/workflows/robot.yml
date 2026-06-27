@@ -1,0 +1,62 @@
+name: Jira Robot
+
+# Runs the Jira -> code -> PR workflow on GitHub's cloud, so it no longer needs
+# your laptop to be on (the old macOS LaunchAgent did).
+#
+# Rollout: starts as manual-only (workflow_dispatch). Once a manual run is green
+# end to end, uncomment the `schedule` block to run it automatically.
+on:
+  workflow_dispatch:
+  # schedule:
+  #   - cron: "*/5 * * * *"   # every 5 min (min granularity; may be delayed under load)
+
+# Never let two runs overlap (replaces the old /tmp lockfile in run_cron.sh).
+concurrency:
+  group: jira-robot
+  cancel-in-progress: false
+
+# Allow the workflow to push branches and open PRs with the built-in token.
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0          # full history; create_branch.sh needs origin/main
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Install Claude CLI
+        run: npm install -g @anthropic-ai/claude-code
+
+      - name: Configure git identity
+        run: |
+          git config user.name "jira-robot"
+          git config user.email "jira-robot@users.noreply.github.com"
+
+      - name: Run workflow
+        env:
+          # Claude auth via your subscription (no API bill). Mint once with:
+          #   claude setup-token
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          # gh CLI + git push use the built-in token.
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Jira REST API auth.
+          JIRA_BASE_URL: ${{ secrets.JIRA_BASE_URL }}
+          JIRA_EMAIL: ${{ secrets.JIRA_EMAIL }}
+          JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
+          JIRA_PROJECT: ${{ vars.JIRA_PROJECT }}
+        run: ./scripts/workflow.sh
