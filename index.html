@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Keyboard Typing</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app">
+    <header>
+      <h1>keyboard typing</h1>
+      <div id="settings">
+        <div class="setting-group">
+          <span class="label">time</span>
+          <button class="opt active" data-time="15">15</button>
+          <button class="opt" data-time="30">30</button>
+          <button class="opt" data-time="60">60</button>
+          <button class="opt" data-time="120">120</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <div id="stats">
+        <div id="timer">15</div>
+      </div>
+
+      <div id="test-area">
+        <div id="words"></div>
+        <input id="input" type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+      </div>
+
+      <div id="result" class="hidden">
+        <div class="result-item">
+          <span class="result-label">wpm</span>
+          <span class="result-value" id="res-wpm">0</span>
+        </div>
+        <div class="result-item">
+          <span class="result-label">accuracy</span>
+          <span class="result-value" id="res-acc">0%</span>
+        </div>
+        <div class="result-item">
+          <span class="result-label">correct</span>
+          <span class="result-value" id="res-correct">0</span>
+        </div>
+        <div class="result-item">
+          <span class="result-label">incorrect</span>
+          <span class="result-value" id="res-incorrect">0</span>
+        </div>
+        <button id="restart-btn">try again</button>
+      </div>
+    </main>
+
+    <footer>
+      <span>press <kbd>tab</kbd> to restart</span>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
