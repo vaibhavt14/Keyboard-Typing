@@ -43,6 +43,11 @@ echo "=== CREATE PR ==="
 ./scripts/create_pr.sh
 
 echo ""
+echo "=== CODE REVIEW ==="
+# Non-fatal: an automated review is advisory and must not block the pipeline.
+./scripts/review_pr.sh || echo "Review step failed (non-fatal); continuing."
+
+echo ""
 echo "=== MOVE JIRA REVIEW ==="
 ./scripts/move_jira_review.sh
 
