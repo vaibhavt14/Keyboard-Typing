@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Keyboard Typing — minimalistic typing test</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="app__header">
+      <h1 class="app__title">keyboard&nbsp;typing</h1>
+      <p class="app__subtitle">a minimalistic, customizable typing test</p>
+    </header>
+
+    <section class="config" aria-label="Test settings">
+      <div class="config__group" role="group" aria-label="Word count">
+        <span class="config__label">words</span>
+        <div class="config__options" id="word-count-options">
+          <button class="chip" data-words="10">10</button>
+          <button class="chip is-active" data-words="25">25</button>
+          <button class="chip" data-words="50">50</button>
+          <button class="chip" data-words="100">100</button>
+        </div>
+      </div>
+      <div class="config__group" role="group" aria-label="Theme">
+        <span class="config__label">theme</span>
+        <div class="config__options" id="theme-options">
+          <button class="chip is-active" data-theme="dark">dark</button>
+          <button class="chip" data-theme="light">light</button>
+          <button class="chip" data-theme="solar">solar</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats" aria-live="polite">
+      <div class="stat">
+        <span class="stat__value" id="stat-wpm">0</span>
+        <span class="stat__label">wpm</span>
+      </div>
+      <div class="stat">
+        <span class="stat__value" id="stat-accuracy">100<span class="stat__unit">%</span></span>
+        <span class="stat__label">accuracy</span>
+      </div>
+      <div class="stat">
+        <span class="stat__value" id="stat-time">0.0<span class="stat__unit">s</span></span>
+        <span class="stat__label">time</span>
+      </div>
+    </section>
+
+    <section
+      class="typing"
+      id="typing-area"
+      tabindex="0"
+      role="textbox"
+      aria-label="Typing area. Start typing to begin the test."
+    >
+      <div class="typing__words" id="words"></div>
+      <p class="typing__hint" id="hint">click here and start typing</p>
+    </section>
+
+    <div class="result" id="result" hidden aria-live="polite">
+      <h2 class="result__title">done!</h2>
+      <div class="result__metrics">
+        <div><strong id="result-wpm">0</strong> wpm</div>
+        <div><strong id="result-accuracy">0%</strong> accuracy</div>
+        <div><strong id="result-time">0s</strong> time</div>
+      </div>
+    </div>
+
+    <footer class="app__footer">
+      <button class="btn" id="restart" type="button">restart · <kbd>Tab</kbd></button>
+    </footer>
+  </main>
+
+  <script type="module" src="src/app.js"></script>
+</body>
+</html>
