@@ -22,7 +22,7 @@ TICKET=$("$SCRIPT_DIR/get_next_ticket.sh")
 ISSUE=$(jira_get "/rest/api/3/issue/$TICKET?fields=summary,description")
 FIELDS=$(echo "$ISSUE" | jq -c '{summary: .fields.summary, description: .fields.description}')
 
-claude -p --dangerously-skip-permissions "
+claude -p --dangerously-skip-permissions --model claude-opus-4-8 "
 Ticket: $TICKET
 
 Here is the ticket as JSON (description may be in Atlassian Document Format):
