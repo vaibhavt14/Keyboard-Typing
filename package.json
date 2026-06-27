@@ -1,0 +1,16 @@
+{
+  "name": "keyboard-typing",
+  "version": "1.0.0",
+  "description": "A minimalistic and customizable typing test.",
+  "type": "module",
+  "scripts": {
+    "test": "node --test",
+    "start": "node --version >/dev/null && npx --yes serve . || echo 'Open index.html in a browser'"
+  },
+  "license": "MIT",
+  "keywords": [
+    "typing",
+    "typing-test",
+    "wpm"
+  ]
+}
