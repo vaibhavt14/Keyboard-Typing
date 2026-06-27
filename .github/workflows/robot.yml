@@ -7,8 +7,8 @@ name: Jira Robot
 # end to end, uncomment the `schedule` block to run it automatically.
 on:
   workflow_dispatch:
-  # schedule:
-  #   - cron: "*/5 * * * *"   # every 5 min (min granularity; may be delayed under load)
+  schedule:
+    - cron: "*/5 * * * *"   # every 5 min (GitHub's minimum; may be delayed under load)
 
 # Never let two runs overlap (replaces the old /tmp lockfile in run_cron.sh).
 concurrency:
