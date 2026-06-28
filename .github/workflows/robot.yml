@@ -8,7 +8,7 @@ name: Jira Robot
 on:
   workflow_dispatch:
   schedule:
-    - cron: "*/5 * * * *"   # every 5 min (GitHub's minimum; may be delayed under load)
+    - cron: "30 3 * * *"   # 09:00 IST (UTC+5:30) daily — GitHub runs cron in UTC and may delay it a bit
 
 # Never let two runs overlap (replaces the old /tmp lockfile in run_cron.sh).
 concurrency:
